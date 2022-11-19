@@ -13,7 +13,7 @@ function StartPage() {
 			<div>
 				<h1>Start Page</h1>
 				<ul>
-					{tabs.map(({link, title}) => <li> <Link key={link} to={`/${link}`}>{title}</Link> </li>)}
+					{tabs.map(({link, title}) => <li key={link}> <Link to={`/${link}`}>{title}</Link> </li>)}
 				</ul>
 			</div>
 			<Outlet/>

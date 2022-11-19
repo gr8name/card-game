@@ -1,0 +1,61 @@
+.card {
+  border: 3px solid orange;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .logo {
+    margin-bottom: 15px;
+  }
+
+  .health, .armor, .speed, .agility, .luck, .wisdom, .intelligence, .strength, .charisma, .amount, .attack, .movePoint {
+    font-weight: 700;
+    font-size: 14px;
+    font-family: sans-serif;
+  }
+
+  //.health {
+  //  color: orangered;
+  //}
+  //
+  //.attack {
+  //  color: brown;
+  //}
+  //
+  //.strength {
+  //  color: darkslategray;
+  //}
+  //
+  //.armor {
+  //  color: steelblue;
+  //}
+  //
+  //.speed {
+  //  color: green;
+  //}
+  //
+  //.agility {
+  //  color: purple;
+  //}
+  //
+  //.luck {
+  //  color: gold;
+  //}
+  //
+  //.wisdom {
+  //  color: crimson;
+  //}
+  //
+  //.intelligence {
+  //  color: darkcyan;
+  //}
+  //
+  //.charisma {
+  //  color: deeppink;
+  //}
+  //
+  //.amount {
+  //  color: dimgray;
+  //}
+
+}
