@@ -2,6 +2,7 @@ import styles from './Card.module.scss';
 
 type Props = {
 	name: string;
+	amount: number;
 	health: number;
 	armor: number;
 	speed: number;
@@ -13,11 +14,13 @@ type Props = {
 	charisma: number;
 }
 
-function Card({name, health, armor, speed, agility, luck, wisdom, intelligence, strength, charisma}: Props) {
+function Card({name, health, armor, speed, agility, luck, wisdom, intelligence, strength, charisma, amount}: Props) {
 
 	return (
 		<div className={styles.card}>
 			<img className={styles.logo} alt={name} src={`https://robohash.org/set_set4/${name}.png?size=150x150`}/>
+			<span className={styles.name}>{name}</span>
+			<span className={styles.amount}>Amount: {amount.toFixed()}</span>
 			<span className={styles.health}>Health: {health.toFixed(1)}</span>
 			<span className={styles.strength}>Strength: {strength.toFixed(1)}</span>
 			<span className={styles.armor}>Armor: {armor > 0 ? armor.toFixed(1) : 0}</span>

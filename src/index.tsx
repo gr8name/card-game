@@ -1,14 +1,38 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';
+import {createBrowserRouter, RouterProvider} from 'react-router-dom';
+import Battle from './pages/battle';
+import CatGenerator from './pages/CatGenerator';
+import RandomBattle from './pages/randomBattle';
+import StartPage from './pages/startPage';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <StartPage/>,
+    children: [
+      {
+        path   : "/generator",
+        element: <CatGenerator/>,
+      }, {
+        path   : "/random/:catName",
+        element: <Battle/>,
+      }, {
+        path   : "/random",
+        element: <RandomBattle/>,
+      }
+    ]
+  },
+]);
+
 root.render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router}/>
   </React.StrictMode>
 );
 
