@@ -1,4 +1,5 @@
 import {nameByRace} from 'fantasy-name-generator';
+import { NPCs } from "fantasy-content-generator";
 import React from 'react';
 import Card, {Characteristic} from '../../components/Card';
 import styles from './styles.module.scss';
@@ -48,12 +49,16 @@ function CatGenerator({ amount = 6, onCardSelect, race = 'elf' }: Props) {
     <div className={styles['card-container']}>
       {
         Array(amount).fill(1).map(() => {
+          const { traits, desires } = NPCs.generate();
+          
           const name = nameByRace(race, { gender: genderRandomizer() ? 'female' : 'male' }) as string;
           const luck = luckRandomizer() - 2;
           const agility = agilityRandomizer();
           const armor = armorRandomizer();
           const strength = strengthRandomizer()  + (luck * 0.2);
           const attack = ((strength * agility) * 0.4)+ luck;
+          
+          const raceBonus: Partial<Characteristic> = getRaceBonuses(race);
           
           const characteristic: Characteristic = {
             name,
@@ -69,14 +74,15 @@ function CatGenerator({ amount = 6, onCardSelect, race = 'elf' }: Props) {
             speed: speedRandomizer() - (armor * 0.4) + (agility * 0.2),
             wisdom: wisdomRandomizer(),
             intelligence: intelligenceRandomizer(),
-            movePoint: 0
+            movePoint: 0,
+            raceBonus,
+            traits,
+            desires
           }
-          
-          const raceBonus: Partial<Characteristic> = getRaceBonuses(race);
           
           return (
             <div key={name}>
-              <Card {...characteristic} raceBonus={raceBonus}/>
+              <Card {...characteristic} />
               <button onClick={() => onCardSelect && onCardSelect(characteristic)}> Select </button>
             </div>
           );

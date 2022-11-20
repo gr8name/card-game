@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import {createBrowserRouter, RouterProvider} from 'react-router-dom';
 import CardProvider from './context/CardContext';
+import UserProvider from './context/UserContext';
 import Battle from './pages/battle';
 import CatGenerator from './pages/catGenerator';
 import CreateBoard from './pages/createBoard';
@@ -36,11 +37,12 @@ const router = createBrowserRouter([
   },
 ]);
 
-
 root.render(
   <React.StrictMode>
     <CardProvider>
-      <RouterProvider router={router}/>
+      <UserProvider>
+        <RouterProvider router={router}/>
+      </UserProvider>
     </CardProvider>
   </React.StrictMode>
 );

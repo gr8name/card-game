@@ -1,10 +1,12 @@
 import {allRaces} from 'fantasy-name-generator';
-import {useCallback, useState} from 'react';
+import {useCallback, useContext, useState} from 'react';
 import Card, {Characteristic} from '../../components/Card';
+import {UserContext, UserContextType} from '../../context/UserContext';
 import CatGenerator from '../catGenerator';
 import styles from './styles.module.scss'
 
 function CreateBoard() {
+	const { level, boards = [], setBoards} = useContext(UserContext) as UserContextType;
 	const [ board, setBoard ] = useState<Characteristic[]>([]);
 	const [ race, setRace ] = useState<string>("");
 	
@@ -14,9 +16,12 @@ function CreateBoard() {
 	
 	const races = [ ...racesWithGender, ...otherRaces ];
 
+	const saveBoard = useCallback(() => setBoards([...boards, board]), [board, boards, setBoards])
+	
 	return (
 		<div className={styles.wrapper}>
-			<h1> Create Board </h1>
+			<h1> Create Board for level {level} </h1>
+			<h3> Boards amount: {boards?.length} </h3>
 			
 			<select name='races' value={race} onChange={(e) => setRace(e.target.value)}>
 				<option key="empty" value=""/>
@@ -24,7 +29,12 @@ function CreateBoard() {
 			</select>
 			
 			<div className={styles.board}>
-				{board && board.map(card => <Card key={card.name} {...card} />)}
+				{board && (
+					<>
+						{board.map(card => <Card key={card.name} {...card} />)}
+						<button onClick={saveBoard}>Save board</button>
+					</>
+				)}
 			</div>
 			
 			{

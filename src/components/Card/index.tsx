@@ -17,15 +17,15 @@ export type Characteristic = {
 	charisma: number;
 	
 	movePoint: number;
-}
-
-type Props = Characteristic & {
+	
+	traits?: string[],
+	desires?: string[],
 	raceBonus?: Partial<Characteristic>
 }
 
+type Props = Characteristic & {}
 
-
-function Card({raceBonus, name, race, health, attack, armor, speed, agility, luck, wisdom, intelligence, strength, charisma, amount, movePoint}: Props) {
+function Card({traits, desires, raceBonus, name, race, health, attack, armor, speed, agility, luck, wisdom, intelligence, strength, charisma, amount, movePoint}: Props) {
 	const { amount: raceAmount, armor: raceArmor, agility: raceAgility, wisdom: raceWisdom  } = raceBonus || {};
 	
 	return (
@@ -37,6 +37,9 @@ function Card({raceBonus, name, race, health, attack, armor, speed, agility, luc
 			/>
 			<span className={styles.name}>{name}</span>
 			<span className={styles.race}>{race}</span>
+			
+			<span className={styles.traits}>"{traits}"</span>
+			<span className={styles.desires}>"{desires}"</span>
 			
 			<Parameter title='Amount' value={amount} bonus={raceAmount} />
 			<Parameter title='Attack' value={attack} />
