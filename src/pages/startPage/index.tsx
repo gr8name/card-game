@@ -4,6 +4,7 @@ import styles from './styles.module.scss'
 function StartPage() {
 	const tabs = [
 		{ title: 'New Game', link: 'new'},
+		{ title: 'Create Board', link: 'create-board'},
 		{ title: 'Random Battle', link: 'random' },
 		{ title: 'Cat generator', link: 'generator' }
 	];

@@ -64,7 +64,7 @@ function Battle() {
 		} else {
 			attack(p2[0], p1[0]);
 		}
-	}, [player1, setPlayer1, setPlayer2, attack]);
+	}, [player1, setPlayer1, setPlayer2]);
 	
 	const attack = useCallback((card1: Characteristic, card2: Characteristic) => {
 		const attack = [];
@@ -77,7 +77,7 @@ function Battle() {
 		let armorDefeated2 = false;
 		
 		while (attackAmount && health1 > 0 && health2 > 0) {
-			const at1 = card1.attack * card1.amount * card1.movePoint;
+			const at1 = card1.attack * card1.amount * card1.movePoint * 0.5;
 			let pl1= at1 * 1.3
 			if (at1> card2.armor) {
 				armorDefeated2 = true;
@@ -89,7 +89,7 @@ function Battle() {
 			console.log( { at1, health2 });
 			attack.push({ name1: card1.name, name2: card2.name, result: at1, remainHealth: health2})
 			
-			const at2 = card2.attack * card2.amount * card2.movePoint;
+			const at2 = card2.attack * card2.amount * card2.movePoint * 0.5;
 			let pl2 = at2 * 1.3
 			if (at2 > card1.armor) {
 				health1 = health1 - at2
@@ -117,7 +117,7 @@ function Battle() {
 			
 			<div>
 				{ attackResult && (
-					attackResult.map((a, i) => <div key={a.result + i}> {a.name1} attacks {a.name2}: {a.result.toFixed()} - Remain health: {a.remainHealth.toFixed()} </div>)
+					attackResult.map((a, i) => <div key={a.result + i}> <span className={styles.name1}>{a.name1}  </span>  attacks <span className={styles.name2}>{a.name2}</span> : {a.result.toFixed()} - Remain health: {a.remainHealth.toFixed()} </div>)
 				)}
 			</div>
 			

@@ -13,15 +13,31 @@ function getRandomizer(bottom: number, top: number) {
 
 type Props = {
   amount?: number;
+  race?: string;
   onCardSelect?: (card: Characteristic) => void
 }
 
-function CatGenerator({ amount = 6, onCardSelect }: Props) {
+function getRaceBonuses(race: string): Partial<Characteristic> {
+  const amount = race === 'cavePerson' ? 2 : 0;
+  const armor = race === 'dwarf' ? 2 : 0;
+  const agility = race === 'halfling' ? 2 : 0;
+  const wisdom = race === 'gnome' ? 2 : 0;
+  
+  return {
+    amount,
+    armor,
+    agility,
+    wisdom
+  };
+}
+
+function CatGenerator({ amount = 6, onCardSelect, race = 'elf' }: Props) {
+  const genderRandomizer = getRandomizer(0, 1);
   const healthRandomizer = getRandomizer(10, 20);
   const speedRandomizer = getRandomizer(5,10);
-  const agilityRandomizer = getRandomizer(1, 5);
-  const armorRandomizer = getRandomizer(0, 15);
-  const luckRandomizer = getRandomizer(0, 5);
+  const agilityRandomizer = getRandomizer(1, 10);
+  const armorRandomizer = getRandomizer(1, 15);
+  const luckRandomizer = getRandomizer(0, 7);
   const wisdomRandomizer = getRandomizer(1, 15);
   const intelligenceRandomizer = getRandomizer(0, 10);
   const strengthRandomizer = getRandomizer(1, 5);
@@ -32,15 +48,16 @@ function CatGenerator({ amount = 6, onCardSelect }: Props) {
     <div className={styles['card-container']}>
       {
         Array(amount).fill(1).map(() => {
-          const name = nameByRace("elf", {gender: "female"}) as string;
+          const name = nameByRace(race, { gender: genderRandomizer() ? 'female' : 'male' }) as string;
           const luck = luckRandomizer() - 2;
           const agility = agilityRandomizer();
-          const armor = armorRandomizer() ;
+          const armor = armorRandomizer();
           const strength = strengthRandomizer()  + (luck * 0.2);
           const attack = ((strength * agility) * 0.4)+ luck;
           
           const characteristic: Characteristic = {
             name,
+            race,
             health: healthRandomizer(),
             amount: amountRandomizer(),
             attack: attack > 0.1 ? attack : 0.6,
@@ -55,9 +72,11 @@ function CatGenerator({ amount = 6, onCardSelect }: Props) {
             movePoint: 0
           }
           
+          const raceBonus: Partial<Characteristic> = getRaceBonuses(race);
+          
           return (
             <div key={name}>
-              <Card {...characteristic}/>
+              <Card {...characteristic} raceBonus={raceBonus}/>
               <button onClick={() => onCardSelect && onCardSelect(characteristic)}> Select </button>
             </div>
           );

@@ -1,7 +1,9 @@
+import Parameter from './Parameter';
 import styles from './styles.module.scss';
 
 export type Characteristic = {
 	name: string;
+	race: string;
 	amount: number;
 	attack: number;
 	health: number;
@@ -17,27 +19,39 @@ export type Characteristic = {
 	movePoint: number;
 }
 
-type Props = Characteristic & {}
+type Props = Characteristic & {
+	raceBonus?: Partial<Characteristic>
+}
 
-function Card({name, health, attack, armor, speed, agility, luck, wisdom, intelligence, strength, charisma, amount, movePoint}: Props) {
 
+
+function Card({raceBonus, name, race, health, attack, armor, speed, agility, luck, wisdom, intelligence, strength, charisma, amount, movePoint}: Props) {
+	const { amount: raceAmount, armor: raceArmor, agility: raceAgility, wisdom: raceWisdom  } = raceBonus || {};
+	
 	return (
 		<div className={styles.card}>
-			<img className={styles.logo} alt={name} src={`https://robohash.org/set_set4/${name}.png?size=150x150`}/>
+			<img
+				className={styles.logo}
+				alt={name}
+				src={`https://robohash.org/set_set4/${name}.png?size=150x150`}
+			/>
 			<span className={styles.name}>{name}</span>
-			<span className={styles.amount}>Amount: {amount.toFixed()}</span>
-			<span className={styles.attack}>Attack: {attack.toFixed()}</span>
-			<span className={styles.health}>Health: {health.toFixed(1)}</span>
-			<span className={styles.strength}>Strength: {strength.toFixed(1)}</span>
-			<span className={styles.armor}>Armor: {armor > 0 ? armor.toFixed(1) : 0}</span>
-			<span className={styles.speed}>Speed: {speed.toFixed(1)}</span>
-			<span className={styles.agility}>Agility: {agility.toFixed(1)}</span>
-			<span className={styles.luck}>Luck: {luck.toFixed(1)}</span>
-			<span className={styles.wisdom}>Wisdom: {wisdom.toFixed(1)}</span>
-			<span className={styles.intelligence}>Intelligence: {intelligence.toFixed(1)}</span>
-			<span className={styles.charisma}>Charisma: {charisma.toFixed(1)}</span>
+			<span className={styles.race}>{race}</span>
+			
+			<Parameter title='Amount' value={amount} bonus={raceAmount} />
+			<Parameter title='Attack' value={attack} />
+			<Parameter title='Health' value={health} />
+			<Parameter title='Strength' value={strength} accuracy={1} />
+			<Parameter title='Armor' value={armor} bonus={raceArmor} />
+			<Parameter title='Speed' value={speed} accuracy={1} />
+			<Parameter title='Agility' value={agility} accuracy={1} bonus={raceAgility} />
+			{/*<Parameter title='Luck' value={luck} accuracy={1}/>*/}
+			<Parameter title='Wisdom' value={wisdom} accuracy={1} bonus={raceWisdom}/>
+			<Parameter title='Intelligence' value={intelligence} accuracy={1}/>
+			{/*<Parameter title='Charisma' value={charisma} accuracy={1}/>*/}
+
 			<hr/>
-			{ movePoint && <span className={styles.movePoint}>Move Point: {movePoint.toFixed(1)}</span> }
+			{movePoint > 0 && <Parameter title='Move Point' value={movePoint} accuracy={1}/>}
 		</div>
 	);
 }

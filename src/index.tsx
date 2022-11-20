@@ -4,6 +4,7 @@ import {createBrowserRouter, RouterProvider} from 'react-router-dom';
 import CardProvider from './context/CardContext';
 import Battle from './pages/battle';
 import CatGenerator from './pages/catGenerator';
+import CreateBoard from './pages/createBoard';
 import ErrorPage from './pages/errorPage';
 import RandomBattle from './pages/randomBattle';
 import StartPage from './pages/startPage';
@@ -21,6 +22,9 @@ const router = createBrowserRouter([
       {
         path   : "/generator",
         element: <CatGenerator/>,
+      }, {
+        path   : "/create-board",
+        element: <CreateBoard/>,
       }, {
         path   : "/random/:catName",
         element: <Battle/>,
