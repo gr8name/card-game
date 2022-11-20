@@ -14,7 +14,7 @@ export type Characteristic = {
 	strength: number;
 	charisma: number;
 	
-	movePoint?: number;
+	movePoint: number;
 }
 
 type Props = Characteristic & {}
