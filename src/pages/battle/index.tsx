@@ -77,7 +77,7 @@ function Battle() {
 		let armorDefeated2 = false;
 		
 		while (attackAmount && health1 > 0 && health2 > 0) {
-			const at1 = card1.attack * card1.amount * card1.movePoint * 0.5;
+			const at1 = card1.attack * card1.movePoint * 0.2;
 			let pl1= at1 * 1.3
 			if (at1> card2.armor) {
 				armorDefeated2 = true;
@@ -88,8 +88,8 @@ function Battle() {
 			
 			console.log( { at1, health2 });
 			attack.push({ name1: card1.name, name2: card2.name, result: at1, remainHealth: health2})
-			
-			const at2 = card2.attack * card2.amount * card2.movePoint * 0.5;
+				
+			const at2 = card2.attack * card2.movePoint * 0.2;
 			let pl2 = at2 * 1.3
 			if (at2 > card1.armor) {
 				health1 = health1 - at2
