@@ -23,7 +23,9 @@ function getRaceBonuses(race: string): Partial<Characteristic> {
   const armor = race === 'dwarf' ? 2 : 0;
   const agility = race === 'halfling' ? 2 : 0;
   const wisdom = race === 'gnome' ? 2 : 0;
-  const speed = race === 'elf' ? 2 : 0;
+    const speed = race === 'elf' ? 2 : 0;
+    const mana = race === 'highfairy' ? 2 : 0;
+
   
   return {
     amount,
@@ -36,7 +38,8 @@ function getRaceBonuses(race: string): Partial<Characteristic> {
 
 function CatGenerator({ amount = 6, onCardSelect, race = 'elf' }: Props) {
   const genderRandomizer = getRandomizer(0, 1);
-  const healthRandomizer = getRandomizer(20, 50);
+    const healthRandomizer = getRandomizer(20, 50);
+    const manaRandomizer = getRandomizer(10, 20);
   const speedRandomizer = getRandomizer(5,10);
   const agilityRandomizer = getRandomizer(1, 10);
   const armorRandomizer = getRandomizer(1, 15);
@@ -56,7 +59,8 @@ function CatGenerator({ amount = 6, onCardSelect, race = 'elf' }: Props) {
           const name = nameByRace(race, { gender: genderRandomizer() ? 'female' : 'male' }) as string;
           const luck = luckRandomizer() - 2;
           const agility = agilityRandomizer();
-          const armor = armorRandomizer();
+            const armor = armorRandomizer();
+            const mana = manaRandomizer();
           const strength = strengthRandomizer()  + (luck * 0.2);
           const attack = ((strength * agility) * 0.4)+ luck;
           
@@ -79,7 +83,8 @@ function CatGenerator({ amount = 6, onCardSelect, race = 'elf' }: Props) {
             movePoint: 0,
             raceBonus,
             traits,
-            desires
+            desires,
+            mana
           }
           
           return (
