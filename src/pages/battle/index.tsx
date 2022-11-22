@@ -26,34 +26,22 @@ function Battle() {
 			const movePointPlayer1 = Math.ceil(activeCard.speed - oponent.speed);
 			p1 = [{...activeCard, movePoint: movePointPlayer1}];
 			p2 = [{...oponent, movePoint: 1}];
-
-			console.log('P1 faster P2:', movePointPlayer1, 1);
 		}	else if(activeCard.speed < oponent.speed) {
 			const movePointPlayer2 = Math.ceil(oponent.speed - activeCard.speed);
 			p1 = [{...activeCard, movePoint: 1}];
 			p2 = [{...oponent, movePoint: movePointPlayer2}];
-			
-			console.log('P2 faster P1:', 1, movePointPlayer2);
 		} else if (activeCard.luck >= oponent.luck ) {
 			p1 = [{...activeCard, movePoint: 2}];
 			p2 = [{...oponent, movePoint: 1}];
-			console.log('P1 lucker P2:', 2, 1);
 		} else {
 			p1 = [{...activeCard, movePoint: 1}];
 			p2 = [{...oponent, movePoint: 2}];
-			console.log('P2 lucker P1:', 1, 2);
 		}
 		
 		if(p1[0].charisma > p2[0].charisma) {
-			
 			p1 = [{...p1[0], movePoint: p1[0].movePoint + 1}];
-			
-			console.log('P1 charmer than P2:', p1[0].movePoint + 1);
 		}	else if(p1[0].charisma < p2[0].charisma) {
-			
 			p2 = [{...p2[0], movePoint: p2[0].movePoint + 1}];
-	
-			console.log('P2 charmer than P1:', p2[0].movePoint + 1);
 		}
 		
 		setPlayer1(p1);
@@ -88,7 +76,7 @@ function Battle() {
 			
 			console.log( { at1, health2 });
 			attack.push({ name1: card1.name, name2: card2.name, result: at1, remainHealth: health2})
-				
+			
 			const at2 = card2.attack * card2.movePoint * 0.2;
 			let pl2 = at2 * 1.3
 			if (at2 > card1.armor) {
