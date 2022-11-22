@@ -23,18 +23,20 @@ function getRaceBonuses(race: string): Partial<Characteristic> {
   const armor = race === 'dwarf' ? 2 : 0;
   const agility = race === 'halfling' ? 2 : 0;
   const wisdom = race === 'gnome' ? 2 : 0;
+  const speed = race === 'elf' ? 2 : 0;
   
   return {
     amount,
     armor,
     agility,
-    wisdom
+    wisdom,
+    speed
   };
 }
 
 function CatGenerator({ amount = 6, onCardSelect, race = 'elf' }: Props) {
   const genderRandomizer = getRandomizer(0, 1);
-  const healthRandomizer = getRandomizer(10, 20);
+  const healthRandomizer = getRandomizer(20, 50);
   const speedRandomizer = getRandomizer(5,10);
   const agilityRandomizer = getRandomizer(1, 10);
   const armorRandomizer = getRandomizer(1, 15);

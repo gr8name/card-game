@@ -26,7 +26,7 @@ export type Characteristic = {
 type Props = Characteristic & {}
 
 function Card({traits, desires, raceBonus, name, race, health, attack, armor, speed, agility, luck, wisdom, intelligence, strength, charisma, amount, movePoint}: Props) {
-	const { amount: raceAmount, armor: raceArmor, agility: raceAgility, wisdom: raceWisdom  } = raceBonus || {};
+	const { amount: raceAmount, armor: raceArmor, agility: raceAgility, wisdom: raceWisdom, speed: raceSpeed  } = raceBonus || {};
 	
 	return (
 		<div className={styles.card}>
@@ -46,7 +46,7 @@ function Card({traits, desires, raceBonus, name, race, health, attack, armor, sp
 			<Parameter title='Health' value={health} />
 			<Parameter title='Strength' value={strength} accuracy={1} />
 			<Parameter title='Armor' value={armor} bonus={raceArmor} />
-			<Parameter title='Speed' value={speed} accuracy={1} />
+			<Parameter title='Speed' value={speed} accuracy={1} bonus={raceSpeed} />
 			<Parameter title='Agility' value={agility} accuracy={1} bonus={raceAgility} />
 			{/*<Parameter title='Luck' value={luck} accuracy={1}/>*/}
 			<Parameter title='Wisdom' value={wisdom} accuracy={1} bonus={raceWisdom}/>

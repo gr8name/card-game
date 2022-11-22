@@ -1,5 +1,6 @@
 import {Link, Outlet} from 'react-router-dom';
-import styles from './styles.module.scss'
+import styles from './styles.module.scss';
+// import robot from '../../img/Preview.jpg';
 
 function StartPage() {
 	const tabs = [
@@ -16,6 +17,7 @@ function StartPage() {
 				<ul>
 					{tabs.map(({link, title}) => <li key={link}> <Link to={`/${link}`}>{title}</Link> </li>)}
 				</ul>
+				{ /* <img src={robot} /> */}
 			</div>
 			<Outlet/>
 		</div>
