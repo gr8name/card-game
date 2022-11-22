@@ -11,46 +11,51 @@ type Attack = {
 	remainHealth: number;
 }
 
+function getMovePoints(card1: Characteristic, card2: Characteristic): { movePoint1: number, movePoint2: number } {
+	let movePoint1 = 0;
+	let movePoint2 = 0;
+	
+	if (card1.speed > card2.speed) {
+		movePoint1 = Math.ceil(card1.speed - card2.speed);
+		movePoint2 = 1;
+	} else if (card1.speed < card2.speed) {
+		movePoint2 = Math.ceil(card1.speed - card2.speed);
+		movePoint1 = 1;
+	} else if (card1.luck >= card2.luck) {
+		movePoint1 = 2;
+		movePoint2 = 1;
+	} else {
+		movePoint1 = 1;
+		movePoint2 = 2;
+	}
+	
+	if (card1.charisma > card2.charisma) {
+		movePoint1 += 1;
+	} else {
+		movePoint2 += 1;
+	}
+	
+	return { movePoint1, movePoint2 };
+}
+
 function Battle() {
 	const { player1, setPlayer1, player2, setPlayer2 } = useContext(CardContext) as CardContextType;
 	const [attackResult, setAttack] = useState<Attack[]>();
 	
 	const onCardSelect = useCallback((oponent: Characteristic) => {
-		
 		// @ts-ignore
 		const [ activeCard ] = player1;
 		
-		let p1: [Characteristic], p2: [Characteristic];
+		const { movePoint1, movePoint2 } = getMovePoints(activeCard, oponent);
+		setPlayer1([{ ...activeCard, movePoint: movePoint1}]);
+		setPlayer2([{ ...oponent, movePoint: movePoint2}]);
 		
-		if(activeCard.speed > oponent.speed) {
-			const movePointPlayer1 = Math.ceil(activeCard.speed - oponent.speed);
-			p1 = [{...activeCard, movePoint: movePointPlayer1}];
-			p2 = [{...oponent, movePoint: 1}];
-		}	else if(activeCard.speed < oponent.speed) {
-			const movePointPlayer2 = Math.ceil(oponent.speed - activeCard.speed);
-			p1 = [{...activeCard, movePoint: 1}];
-			p2 = [{...oponent, movePoint: movePointPlayer2}];
-		} else if (activeCard.luck >= oponent.luck ) {
-			p1 = [{...activeCard, movePoint: 2}];
-			p2 = [{...oponent, movePoint: 1}];
+		if (movePoint1 > movePoint2) {
+			// @ts-ignore
+			attack(player1[0], player2[0]);
 		} else {
-			p1 = [{...activeCard, movePoint: 1}];
-			p2 = [{...oponent, movePoint: 2}];
-		}
-		
-		if(p1[0].charisma > p2[0].charisma) {
-			p1 = [{...p1[0], movePoint: p1[0].movePoint + 1}];
-		}	else if(p1[0].charisma < p2[0].charisma) {
-			p2 = [{...p2[0], movePoint: p2[0].movePoint + 1}];
-		}
-		
-		setPlayer1(p1);
-		setPlayer2(p2);
-		
-		if (p1[0].movePoint > p2[0].movePoint) {
-			attack(p1[0], p2[0]);
-		} else {
-			attack(p2[0], p1[0]);
+			// @ts-ignore
+			attack(player2[0], player1[0]);
 		}
 	}, [player1, setPlayer1, setPlayer2]);
 	
