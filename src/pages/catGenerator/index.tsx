@@ -32,7 +32,8 @@ function getRaceBonuses(race: string): Partial<Characteristic> {
     armor,
     agility,
     wisdom,
-    speed
+      speed,
+    mana
   };
 }
 
