@@ -117,7 +117,7 @@ function Battle() {
 			
 			<div>
 				{ attackResult && (
-					attackResult.map((a, i) => <div key={a.result + i}> <span className={styles.name1}>{a.name1}  </span>  attacks <span className={styles.name2}>{a.name2}</span> : {a.result.toFixed()} - Remain health: {a.remainHealth.toFixed()} </div>)
+					attackResult.map((a, i) => <div key={a.result + i}> <span className={player1 && player1[0] && a.name1 === player1[0].name ? styles.name1 : styles.name2}>{a.name1}  </span>  attacks <span className={player1 && player1[0] && a.name2 === player1[0].name ? styles.name1 : styles.name2 } >{a.name2}</span> : {a.result.toFixed()} - Remain health: {a.remainHealth.toFixed()} </div>)
 				)}
 			</div>
 			
