@@ -57,7 +57,7 @@ function Battle() {
 			// @ts-ignore
 			attack(player2[0], player1[0]);
 		}
-	}, [player1, setPlayer1, setPlayer2]);
+	}, [player1, setPlayer1, player2, setPlayer2]);
 	
 	const attack = useCallback((card1: Characteristic, card2: Characteristic) => {
 		const attack = [];
