@@ -16,6 +16,7 @@ export type Characteristic = {
 	strength: number;
 	charisma: number;
 	mana: number;
+	balanser: number;
 	
 	movePoint: number;
 	
@@ -26,7 +27,7 @@ export type Characteristic = {
 
 type Props = Characteristic & {}
 
-function Card({traits, desires, raceBonus, name, race, health, attack, armor, speed, agility, luck, wisdom, intelligence, strength, charisma, amount, movePoint, mana}: Props) {
+function Card({traits, desires, raceBonus, name, race, health, attack, armor, speed, agility, luck, wisdom, intelligence, strength, charisma, amount, movePoint, mana, balanser}: Props) {
 	const { amount: raceAmount, armor: raceArmor, agility: raceAgility, wisdom: raceWisdom, speed: raceSpeed, mana:raceMana } = raceBonus || {};
 	
 	return (
@@ -54,7 +55,8 @@ function Card({traits, desires, raceBonus, name, race, health, attack, armor, sp
 			<Parameter title='Wisdom' value={wisdom} accuracy={1} bonus={raceWisdom}/>
 			<Parameter title='Intelligence' value={intelligence} accuracy={1}/>
 			{/*<Parameter title='Charisma' value={charisma} accuracy={1}/>*/}
-
+			<Parameter title='Balanser' value={balanser} accuracy={1} />
+		
 			<hr/>
 			{movePoint > 0 && <Parameter title='Move Point' value={movePoint} accuracy={1}/>}
 		</div>

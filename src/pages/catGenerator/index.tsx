@@ -50,6 +50,8 @@ function CatGenerator({ amount = 6, onCardSelect, race = 'elf' }: Props) {
   const strengthRandomizer = getRandomizer(1, 5);
   const charismaRandomizer = getRandomizer(0, 10);
   const amountRandomizer = getRandomizer(2, 5);
+    
+
   
   return (
     <div className={styles['card-container']}>
@@ -58,13 +60,19 @@ function CatGenerator({ amount = 6, onCardSelect, race = 'elf' }: Props) {
           const { traits, desires } = NPCs.generate();
           
           const name = nameByRace(race, { gender: genderRandomizer() ? 'female' : 'male' }) as string;
-          const luck = luckRandomizer() - 2;
+            const luck = luckRandomizer() - 2;
+            const health = healthRandomizer();
           const agility = agilityRandomizer();
             const armor = armorRandomizer();
             const mana = manaRandomizer();
           const strength = strengthRandomizer()  + (luck * 0.2);
-          const attack = ((strength * agility) * 0.4)+ luck;
-          
+            const attack = ((strength * agility) * 0.4) + luck;
+            const speed = speedRandomizer();
+            const wisdom = wisdomRandomizer();
+            const intelligence = intelligenceRandomizer();
+            const charisma = charismaRandomizer();
+            const amount = amountRandomizer();
+            const balanser = agility + health + armor + mana + strength + attack + speed + luck + wisdom +intelligence + charisma + amount
           const raceBonus: Partial<Characteristic> = getRaceBonuses(race);
           
           const characteristic: Characteristic = {
@@ -85,7 +93,8 @@ function CatGenerator({ amount = 6, onCardSelect, race = 'elf' }: Props) {
             raceBonus,
             traits,
             desires,
-            mana
+            mana,
+            balanser
           }
           
           return (

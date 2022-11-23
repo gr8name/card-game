@@ -1,17 +1,51 @@
 [
   {
+    "name": "Max",
+    "amount": "5",
+    "attack": "10",
+    "health": "50;",
+    "armor": "15;",
+    "speed": "10;",
+    "agility": "10;",
+    "luck": "7;",
+    "wisdom": "15;",
+    "intelligence": "10;",
+    "strength": "5;",
+    "charisma": "10;",
+    "mana": "20;"
+  },
+
+  {
     "name": "Warior",
     "amount": "5",
     "attack": "10",
-    "health": "number;",
-    "armor": "number;",
-    "speed": "number;",
-    "agility": "number;",
-    "luck": "number;",
-    "wisdom": "number;",
-    "intelligence": "number;",
-    "strength": "number;",
-    "charisma": "number;",
-    "mana": "number;"
+    "health": "5;",
+    "armor": "15;",
+    "speed": "5;",
+    "agility": "1;",
+    "luck": "3;",
+    "wisdom": "1;",
+    "intelligence": "1;",
+    "strength": "5;",
+    "charisma": "1;",
+    "mana": "0;"
   },
+
+  {
+    "name": "Archer",
+    "amount": "7",
+    "attack": "8",
+    "health": "10;",
+    "armor": "0;",
+    "speed": "10;",
+    "agility": "10;",
+    "luck": "7;",
+    "wisdom": "1;",
+    "intelligence": "3;",
+    "strength": "5;",
+    "charisma": "1;",
+    "mana": "0;"
+  }
+
+
 ]
