@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Warior",
+    "amount": "5",
+    "attack": "10",
+    "health": "number;",
+    "armor": "number;",
+    "speed": "number;",
+    "agility": "number;",
+    "luck": "number;",
+    "wisdom": "number;",
+    "intelligence": "number;",
+    "strength": "number;",
+    "charisma": "number;",
+    "mana": "number;"
+  },
+]
