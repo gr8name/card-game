@@ -1,6 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import {createBrowserRouter, RouterProvider} from 'react-router-dom';
+import {
+  createHashRouter,
+  RouterProvider
+} from 'react-router-dom';
+import {createTheme, ThemeProvider} from "@mui/material";
+import {LinkProps} from '@mui/material/Link';
+import orange from '@mui/material/colors/orange';
 import CardProvider from './context/CardContext';
 import UserProvider from './context/UserContext';
 import Battle from './pages/battle';
@@ -8,13 +14,33 @@ import CatGenerator from './pages/catGenerator';
 import CreateBoard from './pages/createBoard';
 import ErrorPage from './pages/errorPage';
 import RandomBattle from './pages/randomBattle';
-import StartPage from './pages/startPage';
+import StartPage from './pages/frame';
+import Link from "./components/Link";
+import './fonts';
+
+const theme = createTheme({
+  palette: {
+    primary: orange,
+  },
+  components: {
+    MuiLink: {
+      defaultProps: {
+        component: Link,
+      } as LinkProps,
+    },
+    MuiButtonBase: {
+      defaultProps: {
+        LinkComponent: Link,
+      },
+    },
+  },
+});
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: "/",
     element: <StartPage/>,
@@ -39,10 +65,12 @@ const router = createBrowserRouter([
 
 root.render(
   <React.StrictMode>
-    <CardProvider>
-      <UserProvider>
-        <RouterProvider router={router}/>
-      </UserProvider>
-    </CardProvider>
+    <ThemeProvider theme={theme}>
+      <CardProvider>
+        <UserProvider>
+          <RouterProvider router={router} fallbackElement={<StartPage/>}/>
+        </UserProvider>
+      </CardProvider>
+    </ThemeProvider>
   </React.StrictMode>
 );
