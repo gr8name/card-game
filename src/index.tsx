@@ -16,7 +16,7 @@ import ErrorPage from './pages/errorPage';
 import RandomBattle from './pages/randomBattle';
 import StartPage from './pages/frame';
 import Link from "./components/Link";
-import './fonts';
+import './utils/fonts';
 
 const theme = createTheme({
   palette: {

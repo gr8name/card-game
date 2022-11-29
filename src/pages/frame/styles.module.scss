@@ -7,16 +7,23 @@ $side-bar-size: 150px;
   }
 
   &.content {
-    margin-left: $side-bar-size;
+    padding-left: $side-bar-size;
   }
 }
 
 .drawer {
+  background-color: rgb(143 168 145) !important;
   width: $side-bar-size;
 
   .toggler {
+    border-radius: 0;
+    background-color: rgba(0, 0, 0, 0.5);
     height: $top-bar-size;
     box-shadow: 0 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.7) !important;
+    }
   }
 
   .icon {
@@ -25,9 +32,14 @@ $side-bar-size: 150px;
 }
 
 .topBar {
-  transition: transform 225ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+  transition: 5s width !important;
 }
 
 .content {
-  margin-top: $top-bar-size + 24px;
+  $top-margin: 24px;
+
+  background-color: rgb(143 168 145 / 65%);
+  padding-top: $top-bar-size + $top-margin;
+  margin: -8px -8px;
+  min-height: calc(100vh - $top-bar-size - $top-margin);
 }

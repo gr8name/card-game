@@ -1,4 +1,5 @@
-import styles from './styles.module.scss';
+import Grid from "@mui/material/Unstable_Grid2";
+import {Typography} from "@mui/material";
 
 type Props = {
 	title: string,
@@ -9,12 +10,13 @@ type Props = {
 
 function Parameter({ title, value, bonus, accuracy } : Props) {
 	return (
-		<div className={`${styles.parameter}`}>
-			<div className={styles.title}> {title} </div>
-			
-			<div className={styles.value}>{value.toFixed(accuracy)}</div>
-			{bonus ? <span className={styles.bonus}> + {bonus} </span> : ''}
-		</div>
+		<>
+			<Grid xs={3}> <Typography variant="caption" color="primary"> {title} </Typography></Grid>
+			<Grid xs={3}>
+				<Typography variant="body1" component="span" color="secondary"> {value.toFixed(accuracy)} </Typography>
+				{bonus ? <Typography variant="caption" color="info">+{value.toFixed(accuracy)}</Typography> : ''}
+			</Grid>
+		</>
 	);
 }
 

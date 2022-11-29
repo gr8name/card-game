@@ -3,6 +3,8 @@ import Card, {Characteristic} from '../../components/Card';
 import {CardContext, CardContextType} from '../../context/CardContext';
 import CatGenerator from '../catGenerator';
 import styles from './styles.module.scss';
+import {Typography} from "@mui/material";
+import Grid from "@mui/material/Unstable_Grid2";
 
 type Attack = {
 	name1: string;
@@ -102,13 +104,18 @@ function Battle() {
 	}, [attack, player1, setPlayer1, setPlayer2]);
 
 	return (
-		<div className={styles.container}>
-			<h1> Battle </h1>
-			<div/>
-			<div/>
-			{ player1 ? player1.map(card => <Card key={card.name} {...card} />) : <div/> }
+		<Grid container xs={12} spacing={2}>
+			<Grid xs={12}>
+				<Typography variant="h3"> Battle </Typography>
+			</Grid>
 
-			<div>
+			{ player1 && (
+				<Grid xs={4}>
+					{player1.map(card => <Card key={card.name} {...card} />) }
+				</Grid>
+			)}
+
+			<Grid xs={4}>
 				{ attackResult && (
 					attackResult.map((a, i) => (
 						<div key={a.result + i}>
@@ -125,11 +132,16 @@ function Battle() {
 						</div>
 					)
 					))}
-			</div>
+			</Grid>
 
-			{ player2 ? player2.map(card => <Card key={card.name} {...card} />) :
-				<CatGenerator amount={3} onCardSelect={onCardSelect}/> }
-		</div>
+			{ player2 ? (
+					<Grid xs={4}>
+						{player2.map(card => <Card key={card.name} {...card} />)}
+					</Grid>
+				) :
+				<Grid xs={player1 ? 4 : 12}><CatGenerator amount={3} onCardSelect={onCardSelect} columns={player1 && 12}/> </Grid>
+			}
+		</Grid>
 	)
 }
 
