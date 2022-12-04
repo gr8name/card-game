@@ -9,7 +9,7 @@ import {LinkProps} from '@mui/material/Link';
 import orange from '@mui/material/colors/orange';
 import CardProvider from './context/CardContext';
 import UserProvider from './context/UserContext';
-import Battle from './pages/battle';
+import Battle from './pages/Battle';
 import CatGenerator from './pages/catGenerator';
 import CreateBoard from './pages/createBoard';
 import ErrorPage from './pages/errorPage';

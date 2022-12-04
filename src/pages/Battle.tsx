@@ -1,17 +1,10 @@
-import React, {useCallback, useContext, useState} from 'react';
-import Card, {Characteristic} from '../../components/Card';
-import {CardContext, CardContextType} from '../../context/CardContext';
-import CatGenerator from '../catGenerator';
-import styles from './styles.module.scss';
+import {useCallback, useContext, useState} from 'react';
+import Card, {Characteristic} from '../components/Card';
+import {CardContext, CardContextType} from '../context/CardContext';
+import CatGenerator from './catGenerator';
 import {Typography} from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
-
-type Attack = {
-	name1: string;
-	name2: string;
-	result: number;
-	remainHealth: number;
-}
+import Fight, {Attack} from "../components/Fight";
 
 function getMovePoints(card1: Characteristic, card2: Characteristic): { movePoint1: number, movePoint2: number } {
 	let movePoint1;
@@ -45,7 +38,7 @@ function Battle() {
 	const [attackResult, setAttack] = useState<Attack[]>();
 
 	const attack = useCallback((card1: Characteristic, card2: Characteristic) => {
-		const attack = [];
+		const attack: Attack[]= [];
 
 		let health1 = card1.health;
 		let health2 = card2.health;
@@ -64,7 +57,7 @@ function Battle() {
 				health2 = health2 - pl1
 			}
 
-			attack.push({name1: card1.name, name2: card2.name, result: at1, remainHealth: health2})
+			attack.push({name1: card1.name, name2: card2.name, attacker: card1.name, damage: at1, remainHealth: health2})
 
 			if (health2 > 0) {
 				const at2 = card2.attack * card2.movePoint * 0.2;
@@ -75,7 +68,7 @@ function Battle() {
 					health1 = health1 - pl2
 				}
 
-				attack.push({name1: card2.name, name2: card1.name, result: at2, remainHealth: health1});
+				attack.push({name1: card1.name, name2: card2.name, attacker: card2.name, damage: at2, remainHealth: health1});
 			}
 
 			attackAmount = attackAmount - 1;
@@ -121,19 +114,7 @@ function Battle() {
 			)}
 
 			<Grid xs={12} sm={4}>
-				{ attackResult && attackResult.map((a, i) => (
-					<div key={a.result + i}>
-						<span className={player1 && player1[0] && a.name1 === player1[0].name ? styles.name1 : styles.name2}>
-							{a.name1}
-						</span>
-							&nbsp;attacks&nbsp;
-						<span className={player1 && player1[0] && a.name2 === player1[0].name ? styles.name1 : styles.name2 }>
-							{a.name2}
-						</span>
-						: {a.result.toFixed()}
-						- Remain health: {a.remainHealth.toFixed()}
-					</div>
-				))}
+				{ attackResult && <Fight fightLog={attackResult} />}
 			</Grid>
 
 			{ player2 ? (
