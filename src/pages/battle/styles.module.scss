@@ -1,17 +1,12 @@
-.container {
-  display: grid;
 
-  grid-template-columns: repeat(3, 1fr);
+.attack {
+  display: flex;
+  flex-direction: column;
+}
 
-  .attack {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .name1 {
-    color: brown;
-  }
-  .name2 {
-    color: darkcyan;
-  }
+.name1 {
+  color: brown;
+}
+.name2 {
+  color: darkcyan;
 }

@@ -115,7 +115,7 @@ function Battle() {
 				</Grid>
 			)}
 			{player2 && (
-				<Grid xs={12} sm={0}>
+				<Grid xs={12} sx={{ display: { sm: 'none' }}}>
 					{player2.map(card => <Card minimized={!!player2} key={card.name} {...card} />) }
 				</Grid>
 			)}
@@ -126,8 +126,7 @@ function Battle() {
 						<span className={player1 && player1[0] && a.name1 === player1[0].name ? styles.name1 : styles.name2}>
 							{a.name1}
 						</span>
-
-						attacks
+							&nbsp;attacks&nbsp;
 						<span className={player1 && player1[0] && a.name2 === player1[0].name ? styles.name1 : styles.name2 }>
 							{a.name2}
 						</span>
@@ -138,7 +137,7 @@ function Battle() {
 			</Grid>
 
 			{ player2 ? (
-					<Grid xs={0} sm={4}>
+					<Grid xs={0} sm={4} sx={ {display: { xsDown: 'none'}}}>
 						{player2.map(card => <Card minimized={!!player2} key={card.name} {...card} />)}
 					</Grid>
 				) :
