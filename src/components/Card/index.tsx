@@ -71,9 +71,11 @@ function Card({onLikeClick, traits, desires, raceBonus, name, race, health, atta
 
 			</CardContent>
 			<CardActions sx={{ display: "flex", justifyContent: "space-between"}}>
-				<IconButton aria-label="add to favorites" onClick={onLikeClick}>
-					<FontAwesomeIcon icon={faHeart} />
-				</IconButton>
+				{onLikeClick ? (
+					<IconButton aria-label="add to favorites" onClick={onLikeClick}>
+						<FontAwesomeIcon icon={faHeart} />
+					</IconButton>
+				) : <div />}
 
 				<Badge badgeContent={speed.toFixed(1)} color="primary">
 					<FontAwesomeIcon icon={faTachometerAlt}/>

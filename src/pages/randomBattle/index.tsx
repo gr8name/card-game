@@ -17,11 +17,11 @@ function RandomBattle() {
 	const onCardSelect = useCallback((card: Characteristic) => {
 		navigate(`/random/${card.name}`);
 		setPlayer1([card])
-	}, [navigate]);
+	}, [navigate, setPlayer1]);
 
 	return (
 		<div>
-			<Typography variant="h3"> Random Battle </Typography>
+			<Typography variant="h3" gutterBottom > Random Battle </Typography>
 			<CatGenerator onCardSelect={onCardSelect} />
 		</div>
 	)

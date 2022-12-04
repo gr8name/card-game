@@ -106,7 +106,7 @@ function Battle() {
 	return (
 		<Grid container xs={12} spacing={2}>
 			<Grid xs={12}>
-				<Typography variant="h3"> Battle </Typography>
+				<Typography variant="h3" gutterBottom>Battle</Typography>
 			</Grid>
 
 			{ player1 && (
@@ -116,22 +116,20 @@ function Battle() {
 			)}
 
 			<Grid xs={4}>
-				{ attackResult && (
-					attackResult.map((a, i) => (
-						<div key={a.result + i}>
-							<span className={player1 && player1[0] && a.name1 === player1[0].name ? styles.name1 : styles.name2}>
-								{a.name1}
-							</span>
+				{ attackResult && attackResult.map((a, i) => (
+					<div key={a.result + i}>
+						<span className={player1 && player1[0] && a.name1 === player1[0].name ? styles.name1 : styles.name2}>
+							{a.name1}
+						</span>
 
-							attacks
-							<span className={player1 && player1[0] && a.name2 === player1[0].name ? styles.name1 : styles.name2 }>
-								{a.name2}
-							</span>
-							: {a.result.toFixed()}
-							- Remain health: {a.remainHealth.toFixed()}
-						</div>
-					)
-					))}
+						attacks
+						<span className={player1 && player1[0] && a.name2 === player1[0].name ? styles.name1 : styles.name2 }>
+							{a.name2}
+						</span>
+						: {a.result.toFixed()}
+						- Remain health: {a.remainHealth.toFixed()}
+					</div>
+				))}
 			</Grid>
 
 			{ player2 ? (
