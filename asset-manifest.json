@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/card-game/static/css/main.f5e68b60.css",
-    "main.js": "/card-game/static/js/main.341d4942.js",
+    "main.css": "/card-game/static/css/main.02550a3c.css",
+    "main.js": "/card-game/static/js/main.66d5bf9b.js",
     "static/media/roboto-all-500-normal.woff": "/card-game/static/media/roboto-all-500-normal.0ab669b7a0d19b178f57.woff",
     "static/media/roboto-all-700-normal.woff": "/card-game/static/media/roboto-all-700-normal.a457fde362a540fcadff.woff",
     "static/media/roboto-all-400-normal.woff": "/card-game/static/media/roboto-all-400-normal.c5d001fa922fa66a147f.woff",
@@ -35,11 +35,11 @@
     "static/media/roboto-greek-ext-300-normal.woff2": "/card-game/static/media/roboto-greek-ext-300-normal.35b9d6be04b95f0f0530.woff2",
     "static/media/roboto-greek-ext-700-normal.woff2": "/card-game/static/media/roboto-greek-ext-700-normal.bd9854c751441ccc1a70.woff2",
     "index.html": "/card-game/index.html",
-    "main.f5e68b60.css.map": "/card-game/static/css/main.f5e68b60.css.map",
-    "main.341d4942.js.map": "/card-game/static/js/main.341d4942.js.map"
+    "main.02550a3c.css.map": "/card-game/static/css/main.02550a3c.css.map",
+    "main.66d5bf9b.js.map": "/card-game/static/js/main.66d5bf9b.js.map"
   },
   "entrypoints": [
-    "static/css/main.f5e68b60.css",
-    "static/js/main.341d4942.js"
+    "static/css/main.02550a3c.css",
+    "static/js/main.66d5bf9b.js"
   ]
 }
