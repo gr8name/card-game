@@ -97,7 +97,7 @@ function CatGenerator({amount = 6, onCardSelect, race = 'elf', columns = 4}: Pro
           }
 
           return (
-            <Grid xs={columns} key={name}>
+            <Grid xs={12} sm={columns} key={name}>
               <Card {...characteristic} onLikeClick={() => onCardSelect && onCardSelect(characteristic)} />
             </Grid>
           );
