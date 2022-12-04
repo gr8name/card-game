@@ -110,12 +110,17 @@ function Battle() {
 			</Grid>
 
 			{ player1 && (
-				<Grid xs={4}>
-					{player1.map(card => <Card key={card.name} {...card} />) }
+				<Grid xs={12} sm={4}>
+					{player1.map(card => <Card minimized={!!player1} key={card.name} {...card} />) }
+				</Grid>
+			)}
+			{player2 && (
+				<Grid xs={12} sm={0}>
+					{player2.map(card => <Card minimized={!!player2} key={card.name} {...card} />) }
 				</Grid>
 			)}
 
-			<Grid xs={4}>
+			<Grid xs={12} sm={4}>
 				{ attackResult && attackResult.map((a, i) => (
 					<div key={a.result + i}>
 						<span className={player1 && player1[0] && a.name1 === player1[0].name ? styles.name1 : styles.name2}>
@@ -133,11 +138,11 @@ function Battle() {
 			</Grid>
 
 			{ player2 ? (
-					<Grid xs={4}>
-						{player2.map(card => <Card key={card.name} {...card} />)}
+					<Grid xs={0} sm={4}>
+						{player2.map(card => <Card minimized={!!player2} key={card.name} {...card} />)}
 					</Grid>
 				) :
-				<Grid xs={player1 ? 4 : 12}><CatGenerator amount={3} onCardSelect={onCardSelect} columns={player1 && 12}/> </Grid>
+				<Grid xs={12} sm={player1 ? 4 : 12}><CatGenerator amount={3}  onCardSelect={onCardSelect} columns={player1 && 12}/> </Grid>
 			}
 		</Grid>
 	)

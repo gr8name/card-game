@@ -10,9 +10,10 @@ import {
 } from "@mui/material";
 import Parameter from './Parameter';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faChevronDown, faDove, faHeart, faTachometerAlt} from "@fortawesome/free-solid-svg-icons";
+import {faDove, faHeart, faTachometerAlt} from "@fortawesome/free-solid-svg-icons";
 import {useState} from "react";
 import Grid from "@mui/material/Unstable_Grid2";
+import ExpandBtn from "../ExpandBtn/expandBtn";
 
 export type Characteristic = {
 	name: string;
@@ -39,10 +40,12 @@ export type Characteristic = {
 }
 
 type Props = Characteristic & {
-	onLikeClick?: () => void
+	onLikeClick?: () => void,
+	minimized?: boolean
 }
 
-function Card({onLikeClick, traits, desires, raceBonus, name, race, health, attack, armor, speed, agility, luck, wisdom, intelligence, strength, charisma, amount, movePoint, mana, balanser}: Props) {
+
+function Card({onLikeClick, minimized, traits, desires, raceBonus, name, race, health, attack, armor, speed, agility, luck, wisdom, intelligence, strength, charisma, amount, movePoint, mana, balanser}: Props) {
 	const [expand, setExpand] = useState(false);
 
 	const toggleExpand = () => setExpand(!expand)
@@ -51,53 +54,42 @@ function Card({onLikeClick, traits, desires, raceBonus, name, race, health, atta
 
 	return (
 		<Wrapper>
-			{/*<CardMedia*/}
-			{/*	component="img"*/}
-			{/*	height="140"*/}
-			{/*	alt={name}*/}
-			{/*	image={`https://robohash.org/set_set4/${name}.png`}*/}
-			{/*/>*/}
 			<CardHeader
 				avatar={<Avatar alt={name} variant="rounded" sx={{height: 50, width: 50}} src={`https://robohash.org/set_set4/${name}.png`}/>}
 				title={name}
 				subheader={race}
+				action={minimized && <ExpandBtn onClick={toggleExpand} expand={expand}/>}
 			/>
-			<CardContent sx={{ height: 110}}>
+			<CardContent sx={{height: 110, display: minimized ? 'none' : ''}}>
 				<Typography variant="caption" align="justify">
 					{traits}
 					<br/>
 					{desires}
 				</Typography>
-
 			</CardContent>
-			<CardActions sx={{ display: "flex", justifyContent: "space-between"}}>
+			<CardActions sx={{ display: "grid", gridTemplateAreas: `"left center right"`, gridTemplateColumns: 'repeat(3, 1fr)' }}>
 				{onLikeClick ? (
-					<IconButton aria-label="add to favorites" onClick={onLikeClick}>
+					<IconButton sx={{ gridArea: 'left' }} aria-label="add to favorites" onClick={onLikeClick}>
 						<FontAwesomeIcon icon={faHeart} />
 					</IconButton>
 				) : <div />}
 
-				<Badge badgeContent={speed.toFixed(1)} color="primary">
-					<FontAwesomeIcon icon={faTachometerAlt}/>
-				</Badge>
+
+				<IconButton sx={{gridArea: 'center'}}>
+					<Badge badgeContent={speed.toFixed(1)} color="primary">
+						<FontAwesomeIcon icon={faTachometerAlt}/>
+					</Badge>
+				</IconButton>
 
 				{
 					movePoint > 0 && (
-						<Badge badgeContent={movePoint.toFixed()} color="primary">
-							<FontAwesomeIcon icon={faDove}/>
-						</Badge>
+						<IconButton sx={{gridArea: 'right'}}>
+							<Badge sx={{gridArea: 'center'}} badgeContent={movePoint.toFixed()} color="primary">
+								<FontAwesomeIcon icon={faDove}/>
+							</Badge>
+						</IconButton>
 				)}
-
-				<IconButton
-					onClick={toggleExpand}
-					aria-label="show details"
-					sx={{
-						transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-						transition: 'transform 0.5s'
-					}}
-				>
-					<FontAwesomeIcon icon={faChevronDown} />
-				</IconButton>
+				{!minimized && <ExpandBtn sx={{gridArea: 'right'}} onClick={toggleExpand} expand={expand}/> }
 			</CardActions>
 			<Collapse in={expand} timeout="auto" unmountOnExit>
 				<CardContent>
